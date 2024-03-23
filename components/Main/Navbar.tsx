@@ -2,8 +2,8 @@
 
 import { usePrivy } from "@privy-io/react-auth";
 
-const { login } = usePrivy();
 export default function Navbar() {
+  const { login } = usePrivy();
   return (
     <>
       <div className="">Navbar</div>
