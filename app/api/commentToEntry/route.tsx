@@ -37,8 +37,10 @@ export async function POST(request: NextRequest) {
   };
   let result: { entry: Entry } = await kv.hgetall(entryHash);
   let entry = result.entry;
-  entry.comments[`${commentHash}`] = entryComment;
+  entry.comments.push(entryComment);
   await kv.hset(entryHash, { entry });
+  await kv.sadd("CommentHashSet", commentHash);
+
   const responseEntry = { entryHash, entry };
 
   const jsonResponseEntry = JSON.stringify(responseEntry);

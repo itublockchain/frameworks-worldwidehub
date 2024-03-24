@@ -7,15 +7,14 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
 
-  const hash = crypto.randomBytes(20).toString("hex");
-
   const hashtag = searchParams.get("hashtag");
   const entryTitle = searchParams.get("entryTitle");
   const entryCreatorAddress = searchParams.get("entryCreatorAddress");
 
+  const hash = crypto.randomBytes(20).toString("hex");
   if (!hashtag) {
     return new Response("hashtag is Not Set", {
-      status: 201,
+      status: 400,
     });
   }
   if (!entryCreatorAddress) {
@@ -39,7 +38,7 @@ export async function POST(request: NextRequest) {
     hashtag,
     entryTitle,
     entryCreatorAddress,
-    comments: new Map<String, EntryComment>(),
+    comments: [],
   };
 
   try {

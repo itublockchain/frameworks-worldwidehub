@@ -11,11 +11,13 @@ export async function GET(request: NextRequest) {
     });
   }
   let result: { entry: Entry } = await kv.hgetall(entryHash);
-  let comments = result.entry.comments;
+  let entry = result.entry;
 
-  const jsonResponseComments = JSON.stringify(comments);
+  const responseEntry = { entryHash, entry };
 
-  return new Response(jsonResponseComments, {
+  const jsonResponseEntry = JSON.stringify(responseEntry);
+
+  return new Response(jsonResponseEntry, {
     status: 200,
   });
 }

@@ -2,7 +2,7 @@ export type Entry = {
   hashtag: String;
   entryTitle: String;
   entryCreatorAddress: String;
-  comments: Map<String, EntryComment>;
+  comments: Array<EntryComment>;
 };
 
 export type EntryComment = {
